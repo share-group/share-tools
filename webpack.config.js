@@ -1,36 +1,29 @@
-module.exports = (webpackConfig) => {
-  // FilenameHash
-  webpackConfig.output.chunkFilename = '[name].[hash].js' // http://webpack.github.io/docs/configuration.html#output-chunkfilename
+const path = require('path');
+const webpack = require('webpack');
+module.exports = {
+  entry: ['webpack/hot/dev-server', path.resolve(__dirname, './app/main.js')],
+  output: {
+    path: path.resolve(__dirname, './build'),
+    filename: 'bundle.js'
+  },
+  devServer: {
+    inline: true,
+    port: 8181
+  },
+  module: {
+    loaders: [
+      {
+        test: /\.js?$/,
+        exclude: /(node_modules|bower_components)/,
+        loader: 'babel',
+        query: {
+          presets: ['es2015', 'react']
+        }
 
-  // ClassnameHash
-  const cssLoaderOption = {
-    importLoaders: 1,
-    modules: true,
-    localIdentName: '[hash:base64:5]',
-  }
-  const cssLoaders = webpackConfig.module.loaders[3].loader.split('!')
-  webpackConfig.module.loaders[3].loader = cssLoaders.map(item => {
-    if (item.startsWith('css')) {
-      return `css?${JSON.stringify(cssLoaderOption)}`
-    }
-    return item
-  }).join('!')
-
-  // PreLoaders
-  // webpackConfig.module.preLoaders = [{
-  //   test: /\.js$/,
-  //   enforce: 'pre',
-  //   loader: 'eslint',
-  // }]
-
-
-  // Alias
-  webpackConfig.resolve.alias = {
-    components: `${__dirname}/src/components`,
-    utils: `${__dirname}/src/utils`,
-    config: `${__dirname}/src/utils/config`,
-    enums: `${__dirname}/src/utils/enums`,
-  }
-
-  return webpackConfig
-}
+      }
+    ]
+  },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin()
+  ]
+};
