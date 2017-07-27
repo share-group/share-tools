@@ -1,0 +1,17 @@
+{
+  "extends": "standard",
+  "env": {
+    "browser": false,
+    "node": true,
+    "es6": true
+  },
+  "rules": {
+    "space-before-function-paren": 0
+  },
+  "globals": {
+    "describe": true,
+    "it": true,
+    "redis": true,
+    "afterEach": true
+  }
+}
