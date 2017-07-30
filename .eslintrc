@@ -1,0 +1,27 @@
+/*
+中文官网：http://eslint.cn
+语法：
+  "rule": [
+    ${level}, // 报错级别："off" 或 0 - 关闭规则；"warn" 或 1，发出警告；"error" 或 2，终止脚本
+    ${option1}, // 该规则下的其他子限制
+    ${option2},
+    .....
+  ]
+*/
+{
+  "parser": "babel-eslint",
+  // 继承airbnb的风格
+  "extends": "airbnb",
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true,
+    "node": true,
+    "mocha": true
+  },
+  "globals": {
+  },
+  "parserOptions": {
+    "ecmaVersion": 2015
+  }
+}
