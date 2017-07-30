@@ -3,15 +3,19 @@ const webpack = require('webpack');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
+
+// const extractCSS = new ExtractTextWebpackPlugin('./src/style/style.css');
 
 module.exports = {
-  devtool: 'nosources-source-map',
+  devtool: 'eval-source-map',
   entry: {
     app: './src/index.js',
     vendor: ['lodash', 'react', 'axios', './src/lib/another.js'],
   },
   plugins: [
     new CleanWebpackPlugin(['dist']),
+    new ExtractTextWebpackPlugin('[name].css'),
     new webpack.HotModuleReplacementPlugin(),
     new UglifyJSPlugin({
       output: {
@@ -48,11 +52,11 @@ module.exports = {
       loader: 'babel-loader', // 加载模块 "babel" 是 "babel-loader" 的缩写
       exclude: /node_modules/,
       query: {
-        presets: ['react', 'es2015'],
+        presets: ['react', 'es2015', 'stage-1'],
       },
     }, {
-      test: /\.(less|css)$/,
-      loader: 'style-loader!css-loader!less-loader',
+      test: /\.(css|less)$/,
+      loader: ExtractTextWebpackPlugin.extract(['style', 'css']),
     }],
   },
   output: {

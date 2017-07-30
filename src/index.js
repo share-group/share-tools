@@ -3,22 +3,18 @@ import ReactDOM from 'react-dom';
 import { Menu, Icon } from 'antd';
 
 const SubMenu = Menu.SubMenu;
-require('./style/style.less');
+require('./style/style.css');
 
-class Sider extends React.Component {
+class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       theme: 'dark',
-      current: '0',
     };
   }
 
-  handleClick(e) {
-    console.log('click ', e);
-    this.setState({
-      current: e.key,
-    });
+  handleClick = (e) => {
+    this.setState({ current: e.key });
   }
 
   render() {
@@ -51,6 +47,13 @@ class Sider extends React.Component {
             <Menu.Item key="10">Option 10</Menu.Item>
             <Menu.Item key="11">Option 11</Menu.Item>
             <Menu.Item key="12">Option 12</Menu.Item>
+            <Menu.Item key="15">Option 12</Menu.Item>
+            <Menu.Item key="16">Option 12</Menu.Item>
+            <Menu.Item key="17">Option 12</Menu.Item>
+            <Menu.Item key="18">Option 12</Menu.Item>
+            <Menu.Item key="19">Option 12</Menu.Item>
+            <Menu.Item key="20">Option 12</Menu.Item>
+            <Menu.Item key="21">Option 12</Menu.Item>
           </SubMenu>
         </Menu>
       </div>
@@ -59,4 +62,4 @@ class Sider extends React.Component {
 }
 
 
-ReactDOM.render(<Sider />, document.getElementById('app'));
+ReactDOM.render(<App />, document.getElementById('app'));

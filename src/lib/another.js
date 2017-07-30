@@ -1,5 +1,3 @@
 import { join } from 'lodash';
 
-console.log(
-  join(['Another', 'module', 'loaded!'], ' '),
-);
+join(['Another', 'module', 'loaded!']);
