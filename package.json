@@ -5,8 +5,8 @@
   "description": "some tools to developers",
   "main": "webpack.config.js",
   "scripts": {
-    "dev": "webpack-dev-server",
-    "build": "webpack --config webpack.config.js"
+    "dev": "webpack-dev-server --config webpack/development.js",
+    "build": "webpack --config webpack/production.js"
   },
   "dependencies": {
     "antd": "^2.12.2",

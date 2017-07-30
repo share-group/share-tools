@@ -1,5 +1,5 @@
-import _ from 'lodash';
+import {join} from 'lodash';
 
 console.log(
-  _.join(['Another', 'module', 'loaded!'], ' ')
+  join(['Another', 'module', 'loaded!'], ' ')
 );
