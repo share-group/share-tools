@@ -23,5 +23,10 @@
   },
   "parserOptions": {
     "ecmaVersion": 2015
+  },
+  "rules": {
+    "react/jsx-filename-extension": [
+      "off"
+    ]
   }
 }
