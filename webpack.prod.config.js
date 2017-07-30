@@ -8,14 +8,14 @@ module.exports = {
   devtool: 'nosources-source-map',
   entry: {
     app: './src/index.js',
-    vendor: ['lodash', 'react', 'axios', './src/lib/another.js']
+    vendor: ['lodash', 'react', 'axios', './src/lib/another.js'],
   },
   plugins: [
     new CleanWebpackPlugin(['dist']),
     new webpack.HotModuleReplacementPlugin(),
     new UglifyJSPlugin({
       output: {
-        comments: false
+        comments: false,
       },
       compress: {
         warnings: false,
@@ -27,8 +27,8 @@ module.exports = {
         dead_code: true,
         evaluate: true,
         if_return: true,
-        join_vars: true
-      }
+        join_vars: true,
+      },
     }),
     new HTMLWebpackPlugin({
       inject: 'body',
@@ -39,8 +39,8 @@ module.exports = {
       minify: {
         removeComments: true,
         collapseWhitespace: true,
-      }
-    })
+      },
+    }),
   ],
   module: {
     rules: [{
@@ -48,15 +48,15 @@ module.exports = {
       loader: 'babel-loader', // 加载模块 "babel" 是 "babel-loader" 的缩写
       exclude: /node_modules/,
       query: {
-        presets: ['react', 'es2015']
-      }
+        presets: ['react', 'es2015'],
+      },
     }, {
       test: /\.(less|css)$/,
-      loader: "style-loader!css-loader!less-loader"
-    }]
+      loader: 'style-loader!css-loader!less-loader',
+    }],
   },
   output: {
     filename: '[name].[hash:8].js',
-    path: path.resolve(__dirname, 'dist')
-  }
+    path: path.resolve(__dirname, 'dist'),
+  },
 };
