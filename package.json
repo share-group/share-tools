@@ -5,9 +5,9 @@
   "description": "some tools to developers",
   "main": "webpack.config.js",
   "scripts": {
-    "dev": "webpack-dev-server --config webpack.dev.config.js",
+    "dev": "webpack-dev-server --config webpack.dev.config.js --hot --inline",
     "build": "webpack --config webpack.prod.config.js",
-    "eslint": "eslint . --fix"
+    "eslint": "eslint src/ --fix"
   },
   "dependencies": {
     "antd": "^2.12.2",
@@ -35,6 +35,7 @@
     "less": "^2.7.2",
     "less-loader": "^4.0.5",
     "lodash": "^4.17.4",
+    "optimize-css-assets-webpack-plugin": "^3.0.0",
     "postcss-loader": "^2.0.6",
     "react": "^15.6.1",
     "react-dev-utils": "^3.0.2",

@@ -4,8 +4,7 @@ const HTMLWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
-
-// const extractCSS = new ExtractTextWebpackPlugin('./src/style/style.css');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = {
   devtool: 'eval-source-map',
@@ -15,7 +14,7 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(['dist']),
-    new ExtractTextWebpackPlugin('[name].css'),
+    new ExtractTextWebpackPlugin('[name].[hash:8].css'),
     new webpack.HotModuleReplacementPlugin(),
     new UglifyJSPlugin({
       output: {
@@ -33,6 +32,12 @@ module.exports = {
         if_return: true,
         join_vars: true,
       },
+    }),
+    new OptimizeCssAssetsPlugin({
+      assetNameRegExp: /\.css$/,
+      cssProcessor: require('cssnano'),
+      cssProcessorOptions: {discardComments: {removeAll: true}},
+      canPrint: true
     }),
     new HTMLWebpackPlugin({
       inject: 'body',
@@ -55,8 +60,11 @@ module.exports = {
         presets: ['react', 'es2015', 'stage-1'],
       },
     }, {
-      test: /\.(css|less)$/,
-      loader: ExtractTextWebpackPlugin.extract(['style', 'css']),
+      test: /\.less$/,
+      loader: 'style!css!less',
+    }, {
+      test: /\.css$/,
+      loader: ExtractTextWebpackPlugin.extract('css-loader'),
     }],
   },
   output: {
