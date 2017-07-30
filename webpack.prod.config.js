@@ -2,19 +2,30 @@ const path = require('path');
 const webpack = require('webpack');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
   devtool: 'nosources-source-map',
   entry: {
     app: './src/index.js',
-    vendor: ['lodash']
+    vendor: ['lodash', 'react']
   },
   plugins: [
     new CleanWebpackPlugin(['dist']),
     new webpack.HotModuleReplacementPlugin(),
+    new webpack.optimize.DedupePlugin(),
+    new UglifyJSPlugin({
+      output: {
+        comments: false
+      },
+      compress: {
+        warnings: false
+      }
+    }),
     new HTMLWebpackPlugin({
+      inject: 'body',
       hash: true,
-      mobile: true,
+      cache: true,
       filename: 'index.html',
       template: 'src/index.html',
       minify: {
@@ -22,9 +33,6 @@ module.exports = {
       }
     })
   ],
-  resolve: {
-    extensions: ['.js', '.jsx']
-  },
   module: {
     rules: [{
       test: /\.(js|jsx)$/, // 用正则来匹配文件路径，这段意思是匹配 js 或者 jsx
@@ -39,7 +47,7 @@ module.exports = {
     }]
   },
   output: {
-    filename: '[name].[hash].js',
+    filename: '[name].[hash:8].js',
     path: path.resolve(__dirname, 'dist')
   }
 };
