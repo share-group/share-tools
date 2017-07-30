@@ -2,14 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Menu, Icon} from 'antd';
 const SubMenu = Menu.SubMenu;
-require('./style.less');
+require('./style/style.less');
 
-class App extends React.Component {
+class Sider extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       theme: 'dark',
-      current: '1',
+      current: '0',
     }
   }
 
@@ -31,7 +31,7 @@ class App extends React.Component {
           selectedKeys={[this.state.current]}
           mode="inline"
         >
-          <SubMenu key="sub1" title={<span><Icon type="code-o"/><span>字符串</span></span>}>
+          <SubMenu key="sub1" title={<span><Icon type="mail"/><span>字符串</span></span>}>
             <Menu.Item key="1">Option 1</Menu.Item>
             <Menu.Item key="2">Option 2</Menu.Item>
             <Menu.Item key="3">Option 3</Menu.Item>
@@ -58,4 +58,4 @@ class App extends React.Component {
 }
 
 
-ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(<Sider />, document.getElementById('app'));

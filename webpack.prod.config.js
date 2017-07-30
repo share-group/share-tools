@@ -3,13 +3,12 @@ const webpack = require('webpack');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
   devtool: 'nosources-source-map',
   entry: {
     app: './src/index.js',
-    vendor: ['lodash', 'react', 'axios']
+    vendor: ['lodash', 'react', 'axios', './src/lib/another.js']
   },
   plugins: [
     new CleanWebpackPlugin(['dist']),
@@ -33,7 +32,7 @@ module.exports = {
     }),
     new HTMLWebpackPlugin({
       inject: 'body',
-      cache: true,
+      cache: false,
       filename: 'index.html',
       template: 'src/index.html',
       favicon: 'src/favicon.ico',
