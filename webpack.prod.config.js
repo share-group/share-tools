@@ -7,14 +7,14 @@ const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = {
-  devtool: 'eval-source-map',
+  devtool: 'cheap-module-source-map',
   entry: {
     app: './src/index.js',
-    vendor: ['lodash', 'react', 'axios', './src/lib/another.js'],
+    vendor: ['react'],
   },
   plugins: [
     new CleanWebpackPlugin(['dist']),
-    new ExtractTextWebpackPlugin('[name].[hash:8].css'),
+    new ExtractTextWebpackPlugin('[name].[hash:8].css', 'xxx.[hash:8].css'),
     new webpack.HotModuleReplacementPlugin(),
     new UglifyJSPlugin({
       output: {
