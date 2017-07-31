@@ -10,7 +10,7 @@
     "eslint": "eslint src/ --fix"
   },
   "dependencies": {
-    "antd": "^2.12.2",
+    "antd": "^2.12.3",
     "autoprefixer": "^7.1.2",
     "axios": "^0.16.2",
     "babel-core": "^6.25.0",
@@ -30,7 +30,7 @@
     "eslint-plugin-react": "^7.1.0",
     "express": "^4.15.3",
     "extract-text-webpack-plugin": "^3.0.0",
-    "html-webpack-plugin": "^2.29.0",
+    "html-webpack-plugin": "^2.30.0",
     "html-webpack-template": "^5.6.0",
     "less": "^2.7.2",
     "less-loader": "^4.0.5",
@@ -44,7 +44,7 @@
     "style-loader": "^0.18.2",
     "uglifyjs-webpack-plugin": "^0.4.6",
     "webpack": "^3.4.1",
-    "webpack-dev-middleware": "^1.11.0",
+    "webpack-dev-middleware": "^1.12.0",
     "webpack-dev-server": "^2.6.1"
   }
 }
