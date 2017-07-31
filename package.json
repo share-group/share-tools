@@ -5,6 +5,8 @@
   "description": "some tools to developers",
   "main": "webpack.config.js",
   "scripts": {
+    "precommit": "run npm eslint",
+    "prepush": "run npm precommit",
     "dev": "webpack-dev-server --config webpack.dev.config.js --hot --inline",
     "build": "webpack --config webpack.prod.config.js",
     "eslint": "eslint src/ --fix"
