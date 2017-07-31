@@ -14,7 +14,6 @@ module.exports = class extends React.Component {
     });
   }
   handleClick = (e) => {
-    console.log('click ', e);
     this.setState({
       current: e.key,
     });
@@ -31,7 +30,7 @@ module.exports = class extends React.Component {
           mode="inline"
         >
           <SubMenu key="sub1" title={<span><Icon type="mail" /><span>字符串工具</span></span>}>
-            <Menu.Item key="1"><a href="/xxxx">xxxxxxxxxx</a></Menu.Item>
+            <Menu.Item key="1"><Link>xxxxxxxxxx</Link></Menu.Item>
             <Menu.Item key="2">base64</Menu.Item>
             <Menu.Item key="3">Option 3</Menu.Item>
             <Menu.Item key="4">Option 4</Menu.Item>
