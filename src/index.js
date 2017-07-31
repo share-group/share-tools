@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Menu from './business/menu';
+import App from './business/app';
 
 require('../node_modules/antd/dist/antd.css');
 require('./style/style.css');
 
-ReactDOM.render(<Menu />, document.getElementById('app'));
+ReactDOM.render(<App />, document.getElementById('app'));
