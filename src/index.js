@@ -1,7 +1,7 @@
 import React from 'react';
 import { Router, Route, browserHistory } from 'react-router';
 import ReactDOM from 'react-dom';
-import App from './business/app';
+import App from './app';
 
 import '../node_modules/antd/dist/antd.css';
 import './style/style.css';
