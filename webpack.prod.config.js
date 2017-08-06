@@ -16,6 +16,7 @@ function getEnv() {
 }
 
 const env = getEnv();
+console.log(`当前环境：${env}`);
 
 const config = {
   devtool: env === 'prod' ? 'source-map' : 'eval-source-map',
