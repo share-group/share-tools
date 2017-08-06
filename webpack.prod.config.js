@@ -6,38 +6,36 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
-module.exports = {
-  devtool: 'cheap-module-source-map',
+function getEnv() {
+  for (const argv of process.argv) {
+    if (argv.startsWith('--env=')) {
+      return argv.replace('--env=', '').trim();
+    }
+  }
+  return 'prod';
+}
+
+const env = getEnv();
+
+const config = {
+  devtool: env === 'prod' ? 'source-map' : 'eval-source-map',
   entry: {
     app: './src/index.js',
-    vendor: ['react'],
+    vendor: ['react', 'react-dom', 'react-router', 'axios'],
   },
   plugins: [
     new CleanWebpackPlugin(['dist']),
-    new ExtractTextWebpackPlugin('[name].[hash:8].css', 'xxx.[hash:8].css'),
-    new webpack.HotModuleReplacementPlugin(),
-    new UglifyJSPlugin({
-      output: {
-        comments: false,
-      },
-      compress: {
-        warnings: false,
-        screw_ie8: true,
-        conditionals: true,
-        unused: true,
-        comparisons: true,
-        sequences: true,
-        dead_code: true,
-        evaluate: true,
-        if_return: true,
-        join_vars: true,
-      },
-    }),
+    new ExtractTextWebpackPlugin('[name].[hash:8].css'),
     new OptimizeCssAssetsPlugin({
       assetNameRegExp: /\.css$/,
       cssProcessor: require('cssnano'),
-      cssProcessorOptions: {discardComments: {removeAll: true}},
-      canPrint: true
+      cssProcessorOptions: { discardComments: { removeAll: env === 'prod' } },
+      canPrint: env === 'prod',
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      minChunks: Infinity,
+      filename: '[name].[hash:8].js',
     }),
     new HTMLWebpackPlugin({
       inject: 'body',
@@ -46,8 +44,8 @@ module.exports = {
       template: 'src/index.html',
       favicon: 'src/favicon.ico',
       minify: {
-        removeComments: true,
-        collapseWhitespace: true,
+        removeComments: env === 'prod',
+        collapseWhitespace: env === 'prod',
       },
     }),
   ],
@@ -72,3 +70,27 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
   },
 };
+
+if (env === 'prod') {
+  config.plugins.push(new UglifyJSPlugin({
+    output: {
+      comments: false,
+    },
+    compress: {
+      warnings: false,
+      screw_ie8: true,
+      conditionals: true,
+      unused: true,
+      comparisons: true,
+      sequences: true,
+      dead_code: true,
+      evaluate: true,
+      if_return: true,
+      join_vars: true,
+    },
+  }));
+} else {
+  config.plugins.push(new webpack.HotModuleReplacementPlugin());
+}
+
+module.exports = config;

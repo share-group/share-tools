@@ -1,9 +1,9 @@
 const path = require('path');
 
 const devServer = {
-  hot: true, // 告诉 dev-server 我们在使用 HMR
+  // hot: true, // 告诉 dev-server 我们在使用 HMR
   contentBase: path.resolve(__dirname, 'dist'),
-  compress: true,
+  compress: false,
   inline: true,
   port: 9000,
 };

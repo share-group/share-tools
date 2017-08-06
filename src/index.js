@@ -1,11 +1,11 @@
 import React from 'react';
-import { Router, Route, browserHistory } from 'react-router';
+import { BrowserRouter, Route } from 'react-router-dom';
 import ReactDOM from 'react-dom';
 import App from './app';
 
 import '../node_modules/antd/dist/antd.css';
 import './style/style.css';
 
-ReactDOM.render(<Router history={browserHistory}>
-  <Route path="/" component={App} />
-</Router>, document.getElementById('app'));
+ReactDOM.render(<BrowserRouter>
+  <Route exact path="/" component={App} />
+</BrowserRouter>, document.getElementById('app'));
