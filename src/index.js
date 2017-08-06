@@ -6,3 +6,4 @@ import App from './app';
 ReactDOM.render(<BrowserRouter>
   <Route exact path="/" component={App} />
 </BrowserRouter>, document.getElementById('app'));
+

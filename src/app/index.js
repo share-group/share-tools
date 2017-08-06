@@ -1,14 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Route } from 'react-router-dom';
 import { Menu, Icon } from 'antd';
+import { String } from './pages/controller/string';
 
-// import 'antd/dist/antd.css';
 import '../style/style.css';
 
 const SubMenu = Menu.SubMenu;
 
 
-module.exports = class extends React.Component {
+export default class extends React.Component {
   state = {
     theme: 'dark',
   }
@@ -26,6 +26,7 @@ module.exports = class extends React.Component {
   render() {
     return (
       <div className="side">
+        <Route path="/string/md5" component={String} />
         <Menu
           theme={this.state.theme}
           onClick={this.handleClick}
@@ -34,7 +35,8 @@ module.exports = class extends React.Component {
           mode="inline"
         >
           <SubMenu key="sub1" title={<span><Icon type="mail" /><span>字符串工具</span></span>}>
-            <Menu.Item key="1"><Link to="/string/md5">MD5</Link></Menu.Item>
+            <Menu.Item key="1"><Link to="/string/md5">MD5</Link>
+            </Menu.Item>
             <Menu.Item key="2">base64</Menu.Item>
             <Menu.Item key="3">Option 3</Menu.Item>
             <Menu.Item key="4">Option 4</Menu.Item>
@@ -57,4 +59,4 @@ module.exports = class extends React.Component {
       </div>
     );
   }
-};
+}
