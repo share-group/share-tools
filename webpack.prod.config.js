@@ -6,7 +6,7 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
-function getEnv() {
+function getEnv () {
   for (const argv of process.argv) {
     if (argv.startsWith('--env=')) {
       return argv.replace('--env=', '').trim();
@@ -16,7 +16,6 @@ function getEnv() {
 }
 
 const env = getEnv();
-console.log(`当前环境：${env}`);
 
 const config = {
   devtool: env === 'prod' ? 'source-map' : 'eval-source-map',
@@ -26,17 +25,17 @@ const config = {
   },
   plugins: [
     new CleanWebpackPlugin(['dist']),
-    new ExtractTextWebpackPlugin('[name].[hash:8].css'),
+    new ExtractTextWebpackPlugin('./css/[name].[hash:8].css'),
     new OptimizeCssAssetsPlugin({
       assetNameRegExp: /\.css$/,
       cssProcessor: require('cssnano'),
-      cssProcessorOptions: { discardComments: { removeAll: env === 'prod' } },
+      cssProcessorOptions: {discardComments: {removeAll: env === 'prod'}},
       canPrint: env === 'prod',
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       minChunks: Infinity,
-      filename: '[name].[hash:8].js',
+      filename: './js/[name].[hash:8].js',
     }),
     new HTMLWebpackPlugin({
       inject: 'body',
@@ -67,12 +66,17 @@ const config = {
     }],
   },
   output: {
-    filename: '[name].[hash:8].js',
+    filename: './js/[name].[hash:8].js',
     path: path.resolve(__dirname, 'dist'),
   },
 };
 
 if (env === 'prod') {
+  config.plugins.push(new webpack.DefinePlugin({
+    'process.env': {
+      NODE_ENV: JSON.stringify('production'),
+    },
+  }));
   config.plugins.push(new UglifyJSPlugin({
     output: {
       comments: false,

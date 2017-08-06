@@ -7,8 +7,8 @@
   "scripts": {
     "precommit": "eslint src/",
     "prepush": "npm run precommit",
-    "dev": "npm run eslint && webpack-dev-server --config webpack.dev.config.js --env=dev --hot --inline",
-    "build": "npm run precommit && webpack --config webpack.prod.config.js",
+    "dev": "npm run eslint && webpack-dev-server --config webpack.dev.config.js --env=dev --hot --inline --progress",
+    "build": "npm run precommit && webpack --config webpack.prod.config.js --progress",
     "eslint": "eslint src/ --fix"
   },
   "dependencies": {
