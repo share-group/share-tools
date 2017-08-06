@@ -2,7 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, Icon } from 'antd';
 
+// import 'antd/dist/antd.css';
+import '../style/style.css';
+
 const SubMenu = Menu.SubMenu;
+
 
 module.exports = class extends React.Component {
   state = {
