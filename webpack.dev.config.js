@@ -6,6 +6,6 @@ const devServer = {
   compress: false,
   inline: true,
   port: 9000,
-};
+}; 
 
 module.exports = Object.assign({}, require('./webpack.prod.config'), { devServer });
